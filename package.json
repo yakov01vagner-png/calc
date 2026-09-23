@@ -1,0 +1,14 @@
+{
+  "name": "calc",
+  "version": "1.0.0",
+  "description": "Калькулятор с веб-роутами и консольным режимом, запуск из Git CMD",
+  "main": "src/server.js",
+  "bin": { "calc": "src/cli.js" },
+  "scripts": {
+    "start": "node src/server.js",
+    "calc": "node src/cli.js",
+    "test": "node --test"
+  },
+  "engines": { "node": ">=18" },
+  "license": "MIT"
+}
