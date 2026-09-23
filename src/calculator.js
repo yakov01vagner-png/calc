@@ -1,7 +1,9 @@
-'use strict';
-
 // Безопасный разбор арифметических выражений (без eval).
 // Поддерживается: + - * / % ^, скобки, унарный минус, дробные числа.
+// Файл работает и в Node.js (require), и в браузере (window.Calculator),
+// чтобы приложение на телефоне могло считать без связи с сервером.
+(function (root) {
+'use strict';
 
 function tokenize(input) {
   const tokens = [];
@@ -96,4 +98,7 @@ function evaluate(expression) {
   return Number(result.toPrecision(12));
 }
 
-module.exports = { evaluate };
+const api = { evaluate };
+if (typeof module !== 'undefined' && module.exports) module.exports = api;
+else root.Calculator = api;
+})(typeof self !== 'undefined' ? self : this);

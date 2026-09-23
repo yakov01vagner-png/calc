@@ -44,6 +44,15 @@ test('роуты сервера', async (t) => {
   res = await fetch(`${base}/`);
   assert.match(await res.text(), /Калькулятор/);
 
+  // Файлы мобильного приложения (PWA)
+  res = await fetch(`${base}/manifest.webmanifest`);
+  assert.strictEqual(res.status, 200);
+  assert.strictEqual((await res.json()).display, 'standalone');
+  for (const file of ['/sw.js', '/calculator.js', '/icon-192.png', '/icon-512.png']) {
+    res = await fetch(base + file);
+    assert.strictEqual(res.status, 200, file);
+  }
+
   res = await fetch(`${base}/nope`);
   assert.strictEqual(res.status, 404);
 });
